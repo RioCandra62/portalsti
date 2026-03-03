@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import Collections from "./sections/collections/page";
+import Applications from "./sections/applications/page";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -27,28 +30,17 @@ const fade: Variants = {
   },
 };
 
-// const fadeUp = {
-//   hidden: { opacity: 0, y: 28 },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.9, ease: "easeOut" },
-//   },
-// };
-
-// const fade = {
-//   hidden: { opacity: 0 },
-//   visible: {
-//     opacity: 1,
-//     transition: { duration: 0.8, ease: "easeOut" },
-//   },
-// };
-
 export default function Home() {
   return (
-    <main className="bg-[#FAFAF8] text-[#1E1E1E]">
+    <main className=" text-[#1E1E1E]">
       {/* ================= HERO ================= */}
-      <section className="min-h-screen flex items-center px-6 sm:px-8 md:px-16">
+      <section
+        className="min-h-[90vh] flex items-center px-6 sm:px-8 md:px-16 bg-cover"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1535078035266-a0fa7d3b8f65?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+        }}
+      >
         <div className="max-w-6xl">
           <motion.h1
             variants={fadeUp}
@@ -59,8 +51,9 @@ export default function Home() {
               sm:text-5xl
               md:text-6xl
               lg:text-7xl
-              font-light
+              font-semibold
               leading-tight
+              text-[#6E5235]
             "
           >
             Reconstructing <br /> Reality from Space
@@ -76,7 +69,7 @@ export default function Home() {
               max-w-xl
               text-base
               sm:text-lg
-              text-[#6B6B6B]
+              text-[#F7F2EE]
             "
           >
             A spatial visualization studio transforming PortalCam survey data
@@ -150,69 +143,9 @@ export default function Home() {
       </section>
 
       {/* ================= COLLECTIONS ================= */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fade}
-        className="px-8 md:px-16 py-32 bg-[#F2EEE9]"
-      >
-        <h2 className="text-4xl font-light mb-16">Spatial Collections</h2>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-14">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.05 }}
-              viewport={{ once: true }}
-              className="bg-white border border-[#E3DDD6] hover:shadow-md transition"
-            >
-              <div className="h-64 flex items-center justify-center border-b border-[#E3DDD6]">
-                <span className="text-sm text-[#6B6B6B]">
-                  3D Dataset Preview
-                </span>
-              </div>
-
-              <div className="p-6">
-                <p className="text-lg">Dataset Title</p>
-                <p className="mt-1 text-xs text-[#6B6B6B]">
-                  Gaussian Splat · PortalCam
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
+      <Collections />
       {/* ================= USE CASES ================= */}
-      <section className="px-8 md:px-16 py-32 bg-[#FAFAF8]">
-        <h2 className="text-4xl font-light mb-16">Applications & Use Cases</h2>
-
-        <div className="grid md:grid-cols-3 gap-12">
-          {[
-            "Site Documentation",
-            "Geohazard Monitoring",
-            "Survey Validation",
-          ].map((item, i) => (
-            <motion.div
-              key={item}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white border border-[#E3DDD6] p-8"
-            >
-              <p className="text-xl">{item}</p>
-              <p className="mt-4 text-sm text-[#6B6B6B]">
-                High-fidelity spatial visualization designed for professional
-                survey workflows.
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <Applications />
 
       {/* ================= CTA ================= */}
       <motion.section
