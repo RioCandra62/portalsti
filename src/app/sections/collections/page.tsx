@@ -32,12 +32,12 @@ export default function Collections() {
       whileInView="visible"
       viewport={{ once: true }}
       variants={fade}
-      className="px-8 md:px-16 py-32 bg-[#F2EEE9]"
+      className="px-8 md:px-16 pt-32 pb-16 bg-[#F2EEE9]"
     >
       <h2 className="text-4xl font-light mb-16">Spatial Collections</h2>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-14">
-        {data.map((scan, i) => {
+        {data.slice(0, 3).map((scan, i) => {
           return (
             <motion.a
               href={`/detail/${encodeURIComponent(scan.name)}`}
@@ -48,11 +48,10 @@ export default function Collections() {
               viewport={{ once: true }}
               className="bg-white border border-[#E3DDD6] hover:shadow-md transition"
             >
-              <div className="h-64 flex items-center justify-center border-b border-[#E3DDD6]">
-                <p className="text-sm text-[#6B6B6B]">
-                  3D Dataset Preview
-                </p>
-              </div>
+              <div
+                className="h-64 flex items-center justify-center border-b border-[#E3DDD6] bg-cover bg-center"
+                style={{ backgroundImage: `url(${scan.thumbnail})` }}
+              ></div>
 
               <div className="p-6">
                 <p className="text-lg">{scan.name}</p>
@@ -63,6 +62,14 @@ export default function Collections() {
             </motion.a>
           );
         })}
+      </div>
+      <div className="flex w-full">
+        <a
+          href="/collections"
+          className="text-2xl font-light mt-16 mx-auto hover:scale-110 hover:shadow-lg shadow flex px-6 py-2 border rounded-lg"
+        >
+          View More{" "}
+        </a>
       </div>
     </motion.section>
   );

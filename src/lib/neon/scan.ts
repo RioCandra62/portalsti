@@ -14,3 +14,11 @@ export async function getFilter(id: number) {
   );
   return data.rows
 }
+export async function getAllFilter() {
+  const data = await pool.query(
+    "SELECT * FROM scan RIGHT JOIN filter ON scan.id = filter.scan_id"
+  );
+  return data.rows;
+}
+
+

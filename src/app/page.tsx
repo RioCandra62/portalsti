@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Collections from "./sections/collections/page";
 import Applications from "./sections/applications/page";
+import GaussianSplating from "./sections/gaussian/page";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -35,10 +36,10 @@ export default function Home() {
     <main className=" text-[#1E1E1E]">
       {/* ================= HERO ================= */}
       <section
-        className="min-h-[90vh] flex items-center px-6 sm:px-8 md:px-16 bg-cover"
+        className="min-h-[90vh] flex items-center px-6 sm:px-8 md:px-16 bg-cover bg-fixed"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1535078035266-a0fa7d3b8f65?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            "url('https://images.unsplash.com/photo-1762766768563-7a10e34231e7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
       >
         <div className="max-w-6xl">
@@ -53,7 +54,7 @@ export default function Home() {
               lg:text-7xl
               font-semibold
               leading-tight
-              text-[#6E5235]
+              text-[#F7F2EE]
             "
           >
             Reconstructing <br /> Reality from Space
@@ -91,6 +92,9 @@ export default function Home() {
           artifacts — reconstructed, refined, and presented with clarity.
         </p>
       </motion.section>
+
+      {/* ================= GAUSSIAN SPLATTING ================= */}
+      <GaussianSplating />
 
       {/* ================= FEATURED TECHNOLOGY ================= */}
       <section className="px-6 sm:px-8 md:px-16 py-24 sm:py-32">
