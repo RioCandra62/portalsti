@@ -36,7 +36,7 @@ export default function Home() {
     <main className=" text-[#1E1E1E]">
       {/* ================= HERO ================= */}
       <section
-        className="min-h-[90vh] flex items-center px-6 sm:px-8 md:px-16 bg-cover bg-fixed"
+        className="min-h-[90vh] flex items-center px-6 sm:px-8 md:px-16 bg-cover bg-fixed bg-center"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1762766768563-7a10e34231e7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
@@ -79,6 +79,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= GAUSSIAN SPLATTING ================= */}
+      <GaussianSplating />
+
       {/* ================= STATEMENT ================= */}
       <motion.section
         variants={fade}
@@ -92,9 +95,6 @@ export default function Home() {
           artifacts — reconstructed, refined, and presented with clarity.
         </p>
       </motion.section>
-
-      {/* ================= GAUSSIAN SPLATTING ================= */}
-      <GaussianSplating />
 
       {/* ================= FEATURED TECHNOLOGY ================= */}
       <section className="px-6 sm:px-8 md:px-16 py-24 sm:py-32">
