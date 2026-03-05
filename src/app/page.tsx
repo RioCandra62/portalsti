@@ -118,7 +118,14 @@ export default function Home() {
               data acquisition, optimized for precision and efficiency.
             </p>
 
-            <div className="mt-10 w-24 h-px bg-[#9C6B4E] mx-auto md:mx-0" />
+            <div className="mt-10 mb-5 w-24 h-px bg-[#9C6B4E] mx-auto md:mx-0" />
+
+            <a
+              href="https://xgrids.com/intl/portalcam"
+              className="text-xs tracking-widest uppercase text-[#9C6B4E] hover:scale-110 cursor-pointer"
+            >
+              Learn More
+            </a>
           </motion.div>
 
           {/* IMAGE */}
