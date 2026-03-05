@@ -1,196 +1,129 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import { getScanData } from "@/lib/neon/scan";
+import { useEffect, useState } from "react";
 
 export default function Collections() {
-  const [data, setData] = useState<any[]>([]);
 
+  const [scan, setScan] = useState<any[]>([]);
+
+  // ================= GET DATA =================
   useEffect(() => {
-    async function getData() {
-      const dicta = await getScanData();
-      setData(dicta);
+    async function getScan() {
+      const data = await getScanData();
+      setScan(data);
     }
-    getData();
-  });
+
+    getScan();
+  }, []);
+
+  // ================= LAYOUT PATTERN =================
+  const layoutPattern = [
+    "hero",
+    "tall",
+    "normal",
+    "wide",
+    "wide",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "wide",
+    "normal",
+  ];
+
+  const getLayout = (index: number) => {
+    return layoutPattern[index % layoutPattern.length];
+  };
 
   return (
     <>
-      <h2 className="text-xl md:text-2xl pt-12 px-12 ">ALL COLLECTIONS</h2>
+      <h2 className="text-xl md:text-2xl pt-12 px-12">ALL COLLECTIONS</h2>
+
       <section
         className="
         px-6 md:px-16
         py-10 md:py-12
-        grid
-        gap-10
-        md:grid-cols-4
-        flex-1
+        grid gap-10
+        md:grid-cols-3
       "
       >
-        {/* LEFT BIG */}
-        <a href="" className="md:col-span-3">
-          <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
-          <img
-            src="/assets/image/rotterdam.png"
-            className="
-              w-full
-              h-[260px]
-              sm:h-[320px]
-              md:h-[420px]
-              object-cover
-              mb-4
-            "
-          />
+        {scan.map((item, index) => {
+          const layout = getLayout(index);
 
-          <h3
-            className="
-            text-lg
-            md:text-2xl
-            leading-snug
-          "
-          >
-            A historic landmark that reflects Makassar’s rich cultural heritage,
-            where timeless architecture preserves stories of the city’s past.
-          </h3>
-        </a>
+          return (
+            <a
+              key={item.id}
+              href={`/detail/${encodeURIComponent(item.name)}`}
+              className={`
+                ${layout === "hero" && "md:col-span-2"}
+                ${layout === "wide" && "md:col-span-2"}
+              `}
+            >
+              <h2 className="text-xl md:text-2xl mb-6">{item.name}</h2>
 
-        {/* RIGHT ARTICLE */}
-        <div className="md:row-span-2 ">
-          <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
+              <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
 
-          <img
-            src="https://images.unsplash.com/photo-1578301978162-7aae4d755744?q=80&w=977&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="
-              w-full
-              h-[220px]
-              sm:h-[260px]
-              md:h-[60pc]
-              object-cover
-              mb-4
-            "
-          />
+              {/* IMAGE */}
+              <div className="relative group overflow-hidden">
 
-          <h4
-            className="
-            text-base
-            md:text-lg
-            leading-snug
-          "
-          >
-            A striking waterfront mosque that blends modern architectural beauty
-            with a serene spiritual atmosphere.
-          </h4>
-        </div>
+                <img
+                  src={item.thumbnail}
+                  className={`
+                    w-full object-cover mb-4 bg-black
+                    transition duration-500 group-hover:scale-105
+                    ${
+                      layout === "hero"
+                        ? "h-[420px]"
+                        : layout === "tall"
+                        ? "h-[260px]"
+                        : layout === "wide"
+                        ? "md:h-[360px] h-[260px]"
+                        : "h-[260px]"
+                    }
+                  `}
+                />
 
-        {/* 3rd ARTICLE */}
-        <div>
-          <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
+                {/* HOVER OVERLAY */}
+                <div
+                  className="
+                  absolute inset-0
+                  bg-black/0
+                  group-hover:bg-black/60
+                  transition duration-500
+                  flex items-center justify-center
+                "
+                >
+                  <h3
+                    className="
+                    text-white text-lg md:text-2xl
+                    opacity-0 group-hover:opacity-100
+                    transition duration-500
+                    text-center px-4
+                    tracking-wide uppercase
+                  "
+                  >
+                    {item.name}
+                  </h3>
+                </div>
 
-          <img
-            src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?q=80&w=2044&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="
-              w-full
-              h-[220px]
-              sm:h-[260px]
-              object-cover
-              mb-4
-            "
-          />
+              </div>
 
-          <h4
-            className="
-            text-base
-            md:text-lg
-            leading-snug
-          "
-          >
-            A striking waterfront mosque that blends modern architectural beauty
-            with a serene spiritual atmosphere.
-          </h4>
-        </div>
-
-        {/* 4th ARTICLE */}
-        <div className="md:col-span-2">
-          <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
-
-          <img
-            src="https://images.unsplash.com/photo-1530878902700-5ad4f9e4c318?q=80&w=2534&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="
-              w-full
-              h-[220px]
-              sm:h-[260px]
-              md:h-[360px]
-              object-cover
-              mb-4
-            "
-          />
-
-          <h4
-            className="
-            text-base
-            md:text-lg
-            leading-snug
-          "
-          >
-            A striking waterfront mosque that blends modern architectural beauty
-            with a serene spiritual atmosphere.
-          </h4>
-        </div>
-
-        {/* 5th  ARTICLE */}
-        <div className="md:col-span-2">
-          <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
-
-          <img
-            src="https://images.unsplash.com/photo-1467385829985-2b0fb82b5193?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="
-              w-full
-              h-[220px]
-              sm:h-[260px]
-              md:h-[360px]
-              object-cover
-              mb-4
-            "
-          />
-
-          <h4
-            className="
-            text-base
-            md:text-lg
-            leading-snug
-          "
-          >
-            A striking waterfront mosque that blends modern architectural beauty
-            with a serene spiritual atmosphere.
-          </h4>
-        </div>
-
-        {/* 6th ARTICLE */}
-        <div className="md:col-span-2">
-          <p className="text-xs mb-2">ART MARKET • 22 JUN 2024</p>
-
-          <img
-            src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="
-              w-full
-              h-[220px]
-              sm:h-[260px]
-              md:h-[360px]
-              object-cover
-              mb-4
-            "
-          />
-
-          <h4
-            className="
-            text-base
-            md:text-lg
-            leading-snug
-          "
-          >
-            A striking waterfront mosque that blends modern architectural beauty
-            with a serene spiritual atmosphere.
-          </h4>
-        </div>
+              {/* DESCRIPTION */}
+              <h3
+                className="
+                text-lg
+                md:text-2xl
+                leading-snug
+              "
+              >
+                A historic landmark that reflects Makassar’s rich cultural
+                heritage, where timeless architecture preserves stories of the
+                city’s past.
+              </h3>
+            </a>
+          );
+        })}
       </section>
     </>
   );
